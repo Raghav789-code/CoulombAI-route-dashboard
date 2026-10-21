@@ -1,0 +1,156 @@
+@import '@fontsource-variable/inter';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/600.css';
+
+:root {
+  color-scheme: light;
+  --page: #eef1f0;
+  --surface: #ffffff;
+  --surface-2: #f5f7f6;
+  --surface-3: #eceff0;
+  --ink: #0f1720;
+  --ink-2: #48525b;
+  --muted: #858d94;
+  --line: rgba(15, 23, 32, 0.09);
+  --line-2: rgba(15, 23, 32, 0.16);
+  --navy: #0f1b2a;
+  --navy-ink: #ffffff;
+  --accent: #e8892b;
+  --accent-soft: rgba(232, 137, 43, 0.14);
+  --blue: #2a78d6;
+  --blue-soft: rgba(42, 120, 214, 0.12);
+  --red: #d03b3b;
+  --red-ink: #b42a2a;
+  --red-soft: rgba(208, 59, 59, 0.1);
+  --green: #0ca30c;
+  --green-ink: #006300;
+  --amber: #fab219;
+
+  --map-bg: #e7eceb;
+  --map-grid: #d8e0de;
+  --map-grid-major: #ccd6d3;
+  --map-road: #a9b2b4;
+  --map-road-major: #939da0;
+  --map-label: #4a535c;
+  --map-lake: #cfe0e6;
+  --map-lake-line: #b6cfd9;
+  --map-casing: #ffffff;
+  --overlay: rgba(255, 255, 255, 0.92);
+
+  --shadow-1: 0 1px 2px rgba(15, 23, 32, 0.05), 0 6px 20px -6px rgba(15, 23, 32, 0.1);
+  --shadow-2: 0 2px 6px rgba(15, 23, 32, 0.08), 0 18px 48px -12px rgba(15, 23, 32, 0.22);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --font: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --page: #0a0d10;
+  --surface: #12171b;
+  --surface-2: #171d22;
+  --surface-3: #1d252b;
+  --ink: #eef2f4;
+  --ink-2: #b3bcc3;
+  --muted: #7b868e;
+  --line: rgba(255, 255, 255, 0.07);
+  --line-2: rgba(255, 255, 255, 0.14);
+  --navy: #e9eef2;
+  --navy-ink: #0b0f12;
+  --accent: #f29a3d;
+  --accent-soft: rgba(242, 154, 61, 0.16);
+  --blue: #3987e5;
+  --blue-soft: rgba(57, 135, 229, 0.16);
+  --red: #e66767;
+  --red-ink: #f08a8a;
+  --red-soft: rgba(230, 103, 103, 0.14);
+  --green-ink: #3fc03f;
+
+  --map-bg: #0f1518;
+  --map-grid: #172024;
+  --map-grid-major: #1d282d;
+  --map-road: #3a464c;
+  --map-road-major: #4f5c63;
+  --map-label: #95a2a9;
+  --map-lake: #13303b;
+  --map-lake-line: #1b4352;
+  --map-casing: #0f1518;
+  --overlay: rgba(18, 23, 27, 0.9);
+
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px -8px rgba(0, 0, 0, 0.5);
+  --shadow-2: 0 2px 8px rgba(0, 0, 0, 0.5), 0 24px 60px -12px rgba(0, 0, 0, 0.7);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'cv11', 'ss01';
+  transition: background-color 0.3s ease;
+}
+
+button,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+.mono {
+  font-family: var(--mono);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line-2);
+  border-radius: 10px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
