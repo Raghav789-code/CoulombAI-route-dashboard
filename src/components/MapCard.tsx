@@ -1,14 +1,23 @@
-import { lazy, Suspense, useMemo, useRef } from 'react'
+import { lazy, Suspense, useEffect, useMemo, useRef, type KeyboardEvent } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { Map2D, type MapHandle } from './Map2D'
 import { useStore, useTrip, useWeekTrips } from '../state/store'
-import { modeScale, TABS, type LegendSpec } from '../lib/scales'
+import { modeScale, TABS, type LegendSpec, type Tab } from '../lib/scales'
 import { sampleAt, trafficLevel, TRAFFIC_LABELS } from '../lib/sample'
 import { fmtClock, fmtDev, fmtDur } from '../lib/format'
 import { PlaybackBar } from './PlaybackBar'
-import { IconCube, IconMap, IconTarget, IconVideo } from './Icons'
+import { IconBolt, IconCalendar, IconCube, IconGauge, IconMap, IconMountain, IconRoute, IconTarget, IconTraffic, IconVideo } from './Icons'
 
 const Map3D = lazy(() => import('./Map3D'))
+
+const TAB_ICONS: Record<Tab, typeof IconMap> = {
+  week: IconCalendar,
+  deviation: IconRoute,
+  speed: IconGauge,
+  energy: IconBolt,
+  traffic: IconTraffic,
+  elevation: IconMountain,
+}
 
 export function MapCard() {
   const trip = useTrip()
@@ -27,6 +36,30 @@ export function MapCard() {
     return l.kind === 'week' ? { ...l, count: week.length } : l
   }, [trip, tab, theme, week.length])
   const padding = useMemo(() => ({ top: 64, right: 40, bottom: 40, left: 230 }), [])
+  const tabsRef = useRef<HTMLDivElement>(null)
+
+  // Keep the active tab visible when the bar scrolls on narrow maps.
+  useEffect(() => {
+    const bar = tabsRef.current
+    const btn = bar?.querySelector<HTMLElement>(`[data-tab="${tab}"]`)
+    if (!bar || !btn || bar.scrollWidth <= bar.clientWidth) return
+    bar.scrollTo({ left: btn.offsetLeft - (bar.clientWidth - btn.offsetWidth) / 2, behavior: 'smooth' })
+  }, [tab])
+
+  // Roving arrow-key navigation across the tablist (WAI-ARIA tabs pattern).
+  const onTabKey = (e: KeyboardEvent<HTMLDivElement>) => {
+    const i = TABS.findIndex((t) => t.id === tab)
+    const next =
+      e.key === 'ArrowRight' ? (i + 1) % TABS.length
+      : e.key === 'ArrowLeft' ? (i - 1 + TABS.length) % TABS.length
+      : e.key === 'Home' ? 0
+      : e.key === 'End' ? TABS.length - 1
+      : -1
+    if (next < 0) return
+    e.preventDefault()
+    setTab(TABS[next].id)
+    tabsRef.current?.querySelector<HTMLElement>(`[data-tab="${TABS[next].id}"]`)?.focus()
+  }
 
   return (
     <section className="map-card" aria-label="Route map">
@@ -51,13 +84,20 @@ export function MapCard() {
         </AnimatePresence>
 
         <div className="map-top">
-          <div className="seg tabs" role="tablist" aria-label="Map layer">
-            {TABS.map((t) => (
-              <button key={t.id} role="tab" aria-selected={tab === t.id} className={tab === t.id ? 'on' : ''} onClick={() => setTab(t.id)}>
-                {tab === t.id && <motion.span layoutId="tab-pill" className="seg-pill" transition={{ type: 'spring', stiffness: 500, damping: 38 }} />}
-                <span className="seg-label">{t.label}</span>
-              </button>
-            ))}
+          <div className="seg tabs" role="tablist" aria-label="Map layer" ref={tabsRef} onKeyDown={onTabKey}>
+            {TABS.map((t) => {
+              const Icon = TAB_ICONS[t.id]
+              const on = tab === t.id
+              return (
+                <button key={t.id} role="tab" aria-selected={on} tabIndex={on ? 0 : -1} data-tab={t.id} className={on ? 'on' : ''} onClick={() => setTab(t.id)} title={t.label}>
+                  {on && <motion.span layoutId="tab-pill" className="seg-pill" transition={{ type: 'spring', stiffness: 500, damping: 38 }} />}
+                  <span className="seg-label">
+                    <Icon size={14} className="tab-icon" />
+                    <span className="tab-text">{t.label}</span>
+                  </span>
+                </button>
+              )
+            })}
           </div>
           <div className="map-tools">
             <div className="seg" role="group" aria-label="Map view">

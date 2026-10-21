@@ -112,6 +112,28 @@ export const IconRoute = (p: P) => (
     <path d="M8.5 19H16a3.5 3.5 0 0 0 0-7H8a3.5 3.5 0 0 1 0-7h7.5" />
   </svg>
 )
+export const IconCalendar = (p: P) => (
+  <svg {...base(p)}>
+    <rect x="3.5" y="5" width="17" height="15.5" rx="2.5" />
+    <path d="M3.5 10h17M8 3v4M16 3v4" />
+    <circle cx="8.5" cy="14.5" r="1" fill="currentColor" stroke="none" />
+    <circle cx="12" cy="14.5" r="1" fill="currentColor" stroke="none" />
+    <circle cx="15.5" cy="14.5" r="1" fill="currentColor" stroke="none" />
+  </svg>
+)
+export const IconGauge = (p: P) => (
+  <svg {...base(p)}>
+    <path d="M4.2 17.5a9 9 0 1 1 15.6 0" />
+    <path d="m12 13.5 4.2-4.2" />
+    <circle cx="12" cy="13.5" r="1.6" fill="currentColor" />
+  </svg>
+)
+export const IconMountain = (p: P) => (
+  <svg {...base(p)}>
+    <path d="m2.5 19.5 6.5-11 4 6.5 2.5-3.5 6 8Z" />
+    <path d="m7 11 2 1.5L11 11" />
+  </svg>
+)
 export const IconTraffic = (p: P) => (
   <svg {...base(p)}>
     <rect x="7" y="2.5" width="10" height="19" rx="3" />
