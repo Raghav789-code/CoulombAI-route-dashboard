@@ -1,8 +1,8 @@
-# Coulomb · Route Intelligence
+# CoulombAI · Route Intelligence
 
 An EV fleet dashboard that shows **the route a vehicle drove**, the **route parameters** that matter for an EV, and a **video session** that replays the trip as a cinematic 3D flight along its path.
 
-Built for the Coulomb AI frontend assignment (brief: *"a Dashboard that shows the route driven by vehicles, specific route parameters, and includes a video session button to display the vehicle's travel path"*).
+Built for the CoulombAI frontend assignment (brief: *"a Dashboard that shows the route driven by vehicles, specific route parameters, and includes a video session button to display the vehicle's travel path"*).
 
 ![Stack](https://img.shields.io/badge/React-19-61dafb) ![Three.js](https://img.shields.io/badge/three.js-r186-black) ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6)
 

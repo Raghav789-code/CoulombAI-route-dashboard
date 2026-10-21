@@ -581,7 +581,7 @@ function drawHud(ctx: CanvasRenderingContext2D, W: number, H: number, trip: Trip
   const font = (w: number, px: number, mono = false) => `${w} ${px * u}px ${mono ? '"JetBrains Mono", monospace' : '"Inter Variable", system-ui, sans-serif'}`
   ctx.fillStyle = 'rgba(255,255,255,.6)'
   ctx.font = font(600, 12)
-  ctx.fillText(`COULOMB · ROUTE INTELLIGENCE   ${trip.plan.vehicle.name} · ${trip.plan.vehicle.plate}`, 32 * u, 40 * u)
+  ctx.fillText(`COULOMBAI · ROUTE INTELLIGENCE   ${trip.plan.vehicle.name} · ${trip.plan.vehicle.plate}`, 32 * u, 40 * u)
   ctx.fillStyle = '#fff'
   ctx.font = font(650, 28)
   ctx.fillText(trip.label, 32 * u, 76 * u)

@@ -22,7 +22,7 @@ export function TopBar() {
       <div className="brand">
         <BrandMark />
         <div>
-          <div className="brand-name">Coulomb</div>
+          <div className="brand-name">CoulombAI</div>
           <div className="brand-sub">Route Intelligence</div>
         </div>
       </div>
